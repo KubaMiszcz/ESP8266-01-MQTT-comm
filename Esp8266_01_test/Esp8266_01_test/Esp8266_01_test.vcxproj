@@ -12,20 +12,22 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C5F80730-F44F-4478-BDAE-6634EFC2CA88}</ProjectGuid>
-    <RootNamespace>Sketch1</RootNamespace>
-    <ProjectName>Sketch</ProjectName>
+    <RootNamespace>Esp8266_01_test</RootNamespace>
+    <ProjectName>Esp8266_01_test</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset></PlatformToolset>
+    <PlatformToolset>
+    </PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset></PlatformToolset>
+    <PlatformToolset>
+    </PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -40,16 +42,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Esp8266_01_test;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266WiFi\src;$(ProjectDir)..\..\..\..\..\Moje Dokumenty\Arduino\libraries\PubSubClient-2.6.0\src;$(ProjectDir)..\..\..\..\..\..\Program Files (x86)\Arduino\libraries;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries;$(ProjectDir)..\..\..\..\..\Moje Dokumenty\Arduino\libraries;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\libb64;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\spiffs;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\umm_malloc;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\variants\generic;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\include;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\lwip2\include;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\libc\xtensa-lx106-elf\include;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include;C:\Users\KubaMiszcz\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.Esp8266_01_test.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__ESP8266_ESp8266__;__ESP8266_ESP8266__;__ets__;ICACHE_FLASH;F_CPU=80000000L;LWIP_OPEN_SRC;TCP_MSS=536;ARDUINO=10607;ARDUINO_ESP8266_GENERIC;ARDUINO_ARCH_ESP8266;ESP8266;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -69,18 +70,21 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-    <ItemGroup>
+  <ItemGroup>
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Sketch1.ino">
+    <None Include="Esp8266_01_test.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
-   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ItemGroup>
+    <ClInclude Include="__vm\.Esp8266_01_test.vsarduino.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
