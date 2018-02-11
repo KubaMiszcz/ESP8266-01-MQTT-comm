@@ -66,13 +66,14 @@ String t1 = "ON";
 String t2 = "OFF";
 String t3 = "testmesage";
 void loop() {
+	delay(100);
 	if (!client.connected()) {
 		reconnect();
 	}
 	client.loop();
 	//2 seconds minimum between Read Sensors and Publish
 	long now = millis();
-	if (now - lastMsg > 2000) {
+	if (now - lastMsg > 5000) {
 		lastMsg = now;
 		//Read Sensors (simulate by increasing the values, range:0-90)
 		//Publish Values to MQTT broker
