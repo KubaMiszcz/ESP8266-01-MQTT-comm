@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="temoerature.inoo" />
+    <None Include="switch.inoo" />
     <None Include="Esp8266_01_test.ino" />
+    <None Include="myswitch.inoo" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Esp8266_01_test.vsarduino.h">

@@ -1,17 +1,17 @@
 /*
-It connects to an MQTT server then:
-- on 0 switches off relay
-- on 1 switches on relay
-- on 2 toggles the state of the relay
+ It connects to an MQTT server then:
+  - on 0 switches off relay
+  - on 1 switches on relay
+  - on 2 toggles the state of the relay
 
-- sends 0 on off relay
-- sends 1 on on relay
+  - sends 0 on off relay
+  - sends 1 on on relay
 
-It will reconnect to the server if the connection is lost using a blocking
-reconnect function. See the 'mqtt_reconnect_nonblocking' example for how to
-achieve the same result without blocking the main loop.
+ It will reconnect to the server if the connection is lost using a blocking
+ reconnect function. See the 'mqtt_reconnect_nonblocking' example for how to
+ achieve the same result without blocking the main loop.
 
-The current state is stored in EEPROM and restored on bootup
+ The current state is stored in EEPROM and restored on bootup
 */
 
 #include <ESP8266WiFi.h>
@@ -111,7 +111,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		digitalWrite(relay_pin, relayState);  // Turn the LED off by making the voltage HIGH
 		Serial.print("relay_pin current state -> ");
 		Serial.println(relayState);
-		client.publish(outTopic, relayState ? "=>1" : "=>0");  //TODO: is necessary to convert to string?
+		client.publish(outTopic, (relayState == 1) ? true : false);  //TODO: is necessary to convert to string?
 	}
 }
 
@@ -181,18 +181,11 @@ void setup() {
 }
 
 void loop() {
-	delay(50);
 	if (!client.connected()) {
 		reconnect();
 	}
 	client.loop();
 	externalButton();
-	//2 seconds minimum between Read Sensors and Publish
-	long now = millis();
-	if (now - lastMsg > 5000) {
-		lastMsg = now;
-		//Read Sensors (simulate by increasing the values, range:0-90)
-		//Publish Values to MQTT broker
-		client.publish(outTopic, "heartbeat");
-	}
+
+
 }
