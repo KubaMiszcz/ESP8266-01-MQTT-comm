@@ -91,6 +91,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		relayState = LOW;
 		EEPROM.write(0, relayState);    // Write state to EEPROM
 		EEPROM.commit();
+		client.publish(outTopic, "0");  
 	}
 	else if ((char)payload[0] == '1') {
 		digitalWrite(relay_pin, HIGH);  // Turn the LED off by making the voltage HIGH
@@ -98,20 +99,22 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		relayState = HIGH;
 		EEPROM.write(0, relayState);    // Write state to EEPROM
 		EEPROM.commit();
+		client.publish(outTopic, "1");
 	}
-	else if ((char)payload[0] == '2') {
-		relayState = !relayState;
-		digitalWrite(relay_pin, relayState);  // Turn the LED off by making the voltage HIGH
-		Serial.print("relay_pin -> switched to ");
-		Serial.println(relayState);
-		EEPROM.write(0, relayState);    // Write state to EEPROM
-		EEPROM.commit();
-	}
+	//else if ((char)payload[0] == '2') {
+	//	relayState = !relayState;
+	//	digitalWrite(relay_pin, relayState);  // Turn the LED off by making the voltage HIGH
+	//	Serial.print("relay_pin -> switched to ");
+	//	Serial.println(relayState);
+	//	EEPROM.write(0, relayState);    // Write state to EEPROM
+	//	EEPROM.commit();
+	//	client.publish(outTopic, relayState ? "1" : "0");
+	//}
 	else if ((char)payload[0] == '?') {
 		digitalWrite(relay_pin, relayState);  // Turn the LED off by making the voltage HIGH
 		Serial.print("relay_pin current state -> ");
 		Serial.println(relayState);
-		client.publish(outTopic, relayState ? "=>1" : "=>0");  //TODO: is necessary to convert to string?
+		client.publish(outTopic, relayState ? "=>1" : "=>0"); 
 	}
 }
 
@@ -189,7 +192,7 @@ void loop() {
 	externalButton();
 	//2 seconds minimum between Read Sensors and Publish
 	long now = millis();
-	if (now - lastMsg > 5000) {
+	if (now - lastMsg > 10000) {
 		lastMsg = now;
 		//Read Sensors (simulate by increasing the values, range:0-90)
 		//Publish Values to MQTT broker
