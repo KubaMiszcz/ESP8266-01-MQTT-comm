@@ -21,10 +21,10 @@ The current state is stored in EEPROM and restored on bootup
 
 const char* ssid = "grycownia";
 const char* password = "ulaslodziuchnaaa";
-const char* mqtt_server = "192.168.0.101";
+const char* mqtt_server = "192.168.0.201";
 //const char* mqtt_port = 1883;
-const char* mqtt_user = "";
-const char* mqtt_pwd = "";
+const char* mqtt_user = "openhabesp";
+const char* mqtt_pwd = "habopen";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -34,11 +34,11 @@ int value = 0;
 
 // const char* outTopic = "Sonoff1out";
 // const char* inTopic = "Sonoff1in";
-const char* outTopic = "myhome/espOUT";
-const char* inTopic = "myhome/espIN";
+const char* outTopic = "/myhome/Esp01/state1";
+const char* inTopic = "/myhome/Esp01/command1";
 
-int relay_pin = 12;
 int button_pin = 0;
+int relay_pin = 2;
 int internal_LED = 13;
 bool relayState = LOW;
 
@@ -76,7 +76,7 @@ void setup_wifi() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-	Serial.print("Message arrived [");
+	Serial.print("\nMessage arrived [");
 	Serial.print(topic);
 	Serial.print("] ");
 	for (int i = 0; i < length; i++) {
@@ -91,7 +91,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		relayState = LOW;
 		EEPROM.write(0, relayState);    // Write state to EEPROM
 		EEPROM.commit();
-		client.publish(outTopic, "0");  
+		client.publish(outTopic, "0");
 	}
 	else if ((char)payload[0] == '1') {
 		digitalWrite(relay_pin, HIGH);  // Turn the LED off by making the voltage HIGH
@@ -114,7 +114,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		digitalWrite(relay_pin, relayState);  // Turn the LED off by making the voltage HIGH
 		Serial.print("relay_pin current state -> ");
 		Serial.println(relayState);
-		client.publish(outTopic, relayState ? "=>1" : "=>0"); 
+		client.publish(outTopic, relayState ? "=>1" : "=>0");
 	}
 }
 
@@ -170,7 +170,7 @@ void setup() {
 	digitalWrite(relay_pin, relayState);
 
 	debouncer.attach(button_pin);   // Use the bounce2 library to debounce the built in button
-	debouncer.interval(50);         // Input must be low for 50 ms
+	debouncer.interval(100);         // Input must be low for 50 ms
 
 	digitalWrite(internal_LED, LOW);          // Blink to indicate setup
 	delay(500);
@@ -197,5 +197,6 @@ void loop() {
 		//Read Sensors (simulate by increasing the values, range:0-90)
 		//Publish Values to MQTT broker
 		client.publish(outTopic, "heartbeat");
+		Serial.print("o");
 	}
 }
